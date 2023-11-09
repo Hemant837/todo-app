@@ -9,8 +9,8 @@ function NavLinks() {
         </Link>
       </li>
       <li>
-        <Link className="hover:text-gray-200" href="/new-todo">
-          New Todo
+        <Link className="hover:text-gray-200" href="/completed-todos">
+          Completed
         </Link>
       </li>
     </ul>

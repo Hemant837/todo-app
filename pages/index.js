@@ -48,6 +48,23 @@ function HomePage(props) {
     console.log(data);
   }
 
+  async function deleteTodoHandler(todoId) {
+    console.log(todoId);
+    try {
+      const response = await fetch(`/api/delete-todo/${todoId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        console.log("Todo deleted successfully");
+      } else {
+        console.error("Failed to delete todo");
+      }
+    } catch (error) {
+      console.error("Error deleting todo", error);
+    }
+  }
+
   return (
     <Fragment>
       <NewTodoForm onSubmitTodo={addNewTodo} />

@@ -33,10 +33,29 @@ function HomePage(props) {
     console.log(data);
   }
 
+  async function markCompletedHandler(todo) {
+    console.log(todo);
+    const response = await fetch("/api/mark-completed", {
+      method: "PATCH",
+      body: JSON.stringify({ id: todo.id, isCompleted: true }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
+
+    const data = await response.json();
+    console.log(data);
+  }
+
   return (
     <Fragment>
       <NewTodoForm onSubmitTodo={addNewTodo} />
-      <TodosList todos={props.newTodos} />
+      <TodosList
+        todos={props.newTodos}
+        markCompleted={markCompletedHandler}
+        deleteTodo={deleteTodoHandler}
+      />
     </Fragment>
   );
 }
@@ -59,6 +78,7 @@ export async function getStaticProps() {
       newTodos: newTodos.map((newTodo) => ({
         id: newTodo._id.toString(),
         todoText: newTodo.todoText,
+        isCompleted: false,
       })),
     },
     revalidate: 1,

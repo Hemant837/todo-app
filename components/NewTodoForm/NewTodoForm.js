@@ -16,8 +16,11 @@ function NewTodoForm(props) {
     props.onSubmitTodo(todoData);
   }
   return (
-    <form className="p-4 bg-blue-200 rounded-lg" onSubmit={submitTodoHandler}>
-      <h3 className="text-2xl font-semibold mb-4">Create New Todo</h3>
+    <form
+      className="p-4 bg-blue-200 rounded-lg font-semibold"
+      onSubmit={submitTodoHandler}
+    >
+      <h3 className="text-2xl  mb-4">Create New Todo</h3>
       <div className="mb-4">
         <label className="block text-gray-700" htmlFor="todo">
           What's on your mind?
@@ -30,7 +33,7 @@ function NewTodoForm(props) {
           ref={todoInputRef}
         />
       </div>
-      <button className="bg-blue-500 text-white font-semibold px-4 py-2 rounded-md">
+      <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
         Add Todo
       </button>
     </form>

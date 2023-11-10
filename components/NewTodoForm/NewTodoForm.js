@@ -10,8 +10,10 @@ function NewTodoForm(props) {
 
     const todoData = {
       todoText: enteredTodo,
-      iscompleted: false,
+      isCompleted: false,
     };
+
+    todoInputRef.current.value = "";
 
     props.onSubmitTodo(todoData);
   }

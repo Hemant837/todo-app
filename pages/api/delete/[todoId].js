@@ -12,13 +12,17 @@ async function handler(req, res) {
 
     const todoCollection = db.collection("todos");
 
-    const result = await todoCollection.deleteOne({ _id: ObjectId(todoId) });
+    const result = await (
+      await todoCollection.deleteOne({
+        _id: new ObjectId(todoId),
+      })
+    ).deletedCount;
 
     console.log(result);
 
     client.close();
 
-    res.status(200).json({ message: "Todo deleted!" });
+    return res.status(200).json({ message: "Todo deleted!" });
   }
 }
 

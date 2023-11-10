@@ -10,6 +10,7 @@ function TodosItem(props) {
         >
           {props.todo.isCompleted ? "Completed" : "Incomplete"}
         </p>
+        {console.log(props.todo)}
         <button
           className={`bg-green-500 hover:bg-green-600 shadow-sm text-white px-3 py-1 rounded-md ${
             props.todo.isCompleted && "cursor-not-allowed"

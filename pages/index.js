@@ -4,17 +4,6 @@ import { Fragment } from "react";
 import NewTodoForm from "../components/NewTodoForm/NewTodoForm";
 import TodosList from "../components/Todos/TodosList";
 
-// const Dummy_Todos = [
-//   {
-//     id: 1,
-//     todoText: "Hi",
-//   },
-//   {
-//     id: 2,
-//     todoText: "Yo",
-//   },
-// ];
-
 function HomePage(props) {
   async function addNewTodo(newTodoData) {
     console.log(newTodoData);
@@ -34,10 +23,9 @@ function HomePage(props) {
   }
 
   async function markCompletedHandler(todo) {
-    console.log(todo);
-    const response = await fetch("/api/mark-completed", {
+    const response = await fetch(`/api/update/${todo.id}`, {
       method: "PATCH",
-      body: JSON.stringify({ id: todo.id, isCompleted: true }),
+      body: JSON.stringify({ isCompleted: true }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -49,9 +37,8 @@ function HomePage(props) {
   }
 
   async function deleteTodoHandler(todoId) {
-    console.log(todoId);
     try {
-      const response = await fetch(`/api/delete-todo/${todoId}`, {
+      const response = await fetch(`/api/delete/${todoId}`, {
         method: "DELETE",
       });
 
@@ -68,11 +55,14 @@ function HomePage(props) {
   return (
     <Fragment>
       <NewTodoForm onSubmitTodo={addNewTodo} />
-      <TodosList
-        todos={props.newTodos}
-        markCompleted={markCompletedHandler}
-        deleteTodo={deleteTodoHandler}
-      />
+      <div>
+        <h1 className="m-2 font-semibold text-xl">Today's Todo</h1>
+        <TodosList
+          todos={props.newTodos}
+          markCompleted={markCompletedHandler}
+          deleteTodo={deleteTodoHandler}
+        />
+      </div>
     </Fragment>
   );
 }
@@ -95,7 +85,7 @@ export async function getStaticProps() {
       newTodos: newTodos.map((newTodo) => ({
         id: newTodo._id.toString(),
         todoText: newTodo.todoText,
-        isCompleted: false,
+        isCompleted: newTodo.isCompleted,
       })),
     },
     revalidate: 1,

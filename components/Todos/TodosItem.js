@@ -1,10 +1,26 @@
 function TodosItem(props) {
   return (
-    <div className="ml-2 text-white bg-blue-400 flex border w-6/12 rounded-md justify-between items-center mt-10 py-2 shadow-sm">
-      <p className="ml-2">{props.todoText}</p>
-      <div>
-        <button className="mr-2 bg-green-600 rounded-md p-1">Done</button>
-        <button className="mr-2 bg-red-600 rounded-md p-1">Delete</button>
+    <div className="flex items-center justify-between bg-blue-400 p-4 my-2 mx-2 rounded-md shadow-md font-semibold ">
+      <p className="text-lg text-white">{props.todoText}</p>
+      <div className="flex items-center space-x-4">
+        <p
+          className={`text-sm ${
+            props.isCompleted ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {props.isCompleted ? "Completed" : "Incomplete"}
+        </p>
+        <button
+          className={`bg-green-500 hover:bg-green-600 shadow-sm text-white px-3 py-1 rounded-md ${
+            props.isCompleted && "cursor-not-allowed"
+          }`}
+          disabled={props.isCompleted}
+        >
+          Done
+        </button>
+        <button className="bg-red-500 hover:bg-red-600 shadow-sm text-white px-3 py-1 rounded-md">
+          Delete
+        </button>
       </div>
     </div>
   );

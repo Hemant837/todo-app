@@ -8,7 +8,12 @@ function NewTodoForm(props) {
 
     const enteredTodo = todoInputRef.current.value;
 
-    props.onSubmitTodo(enteredTodo)
+    const todoData = {
+      todoText: enteredTodo,
+      iscompleted: false,
+    };
+
+    props.onSubmitTodo(todoData);
   }
   return (
     <form className="p-4 bg-blue-200 rounded-lg" onSubmit={submitTodoHandler}>
